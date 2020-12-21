@@ -5,22 +5,22 @@ require('./Connect_bdd.php');
 if (isset($_POST['inscription'])){
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
-    $mail = $_POST['mail'];
+    $cin = $_POST['cin']
+    $mail = $_POST['email'];
     $phone = $_POST['phone'];
     $password = $_POST['password'];
 
     $query = new Query_bdd();
-    echo $query->inscription($nom, $prenom, $mail, $phone, $password);
-
+    echo $query->inscription($nom, $prenom, $cin, $email, $phone, $password);
 }
 
 
-if (isset($_POST['connexion'])){
-  $mail = $_POST['mail'];
+if (isset($_POST['connexion']))
+  $mail = $_POST['email'];
   $password = $_POST['password'];
 
   $query = new Query_bdd();
-  echo $query->connexion($mail, $password);
+  echo $query->connexion($email, $password);
 }
 
 

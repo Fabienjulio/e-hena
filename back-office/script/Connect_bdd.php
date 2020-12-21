@@ -3,38 +3,38 @@ require('./database.php');
 
 class Query_bdd extends Connect_bdd{
 
-  public function inscription($nom, $prenom, $mail, $phone, $passwd){
+  public function inscription($nom, $prenom, $cin, $phone, $email, $password){
     $bdd = $this->dbconnect();
-    $yet_mail = $bdd->query("SELECT 1 FROM Membre WHERE Mail='$mail'");
+    $yet_mail = $bdd->query("SELECT 1 FROM User WHERE telephone='$phone'");
 
-    if ($yet_mail->rowCount() == 0){
-      $ajouter = $bdd->prepare("INSERT INTO Membre(Nom, Prenom, Mail, Phone, Password) values(? , ? , ? , ?, ?)");
-      $ajouter->execute(array($nom, $prenom, $mail, $phone, sha1($passwd)));
+    if ($yet_mail->rowCosunt() == 0){
+      $ajouter = $bdd->prepare("INSERT INTO User(nom, prenom, cin, email, telephone, mot_de_passe) values(? , ? , ? , ?, ? , ?)");
+      $ajouter->execute(array($nom, $prenom, $cin, $email, $phone, password_hash($password, PASSWORD_DEFAULT)));
       return true;
     }
     else{
-      return "Mail déjà existant";
+      return "Téléphone déjà existant";
     }
 
   }
 
-  public function connexion($mail, $passwd){
+  public function connexion($phone, $password){
     $bdd = $this->dbconnect();
 
-    $yet_mail = $bdd->query("SELECT 1 FROM Membre WHERE Mail='$mail'");
+    $yet_mail = $bdd->query("SELECT 1 FROM User WHERE telephone='$phone'");
 
     if ($yet_mail->rowCount() == 0){
-        return "Adresse Mail Inconnu";
+        return "Numéro Téléphone Incorrecte ou Inéxistant";
     }
     else{
-        $passwd = sha1($passwd);
-        $login = $bdd->query("SELECT 1 FROM Membre WHERE Mail='$mail' AND Password='$passwd'");
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $login = $bdd->query("SELECT 1 FROM User WHERE telephone='$phone' AND mot_de_passe='$password'");
 
         if ($login->rowCount() == 0){
             return "Mot de passe Incorrecte";
         }
         else{
-            return $this->info_user($mail)[0][4]; 
+            return $this->info_user($mail)[0][4];
             // ceci retourne un tableau donc je recupere l indice du numero 
         }
     }
@@ -53,11 +53,9 @@ class Query_bdd extends Connect_bdd{
 
   public function info_user($mail){
     $bdd = $this->dbconnect();
-    $user = $bdd->query("SELECT * FROM Membre WHERE Mail='$mail' ");
+    $user = $bdd->query("SELECT * FROM User WHERE email='$email' ");
 
     return $user->fetchall();
   }
 }
-
-
 ?>

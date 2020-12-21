@@ -5,8 +5,8 @@ require('./Connect_bdd.php');
 if (isset($_POST['inscription'])){
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
-    $cin = $_POST['cin']
-    $mail = $_POST['email'];
+    $cin = $_POST['cin'];
+    $email = $_POST['email'];
     $phone = $_POST['phone'];
     $password = $_POST['password'];
 
@@ -15,18 +15,18 @@ if (isset($_POST['inscription'])){
 }
 
 
-if (isset($_POST['connexion']))
+if (isset($_POST['connexion'])):
   $mail = $_POST['email'];
   $password = $_POST['password'];
 
   $query = new Query_bdd();
   echo $query->connexion($email, $password);
-}
+endif;
 
 
-if (isset($_POST['gamelist'])){
+if (isset($_POST['gamelist'])):
   $query = new Query_bdd();
-  echo $query->all_games();
-}
+  echo $query->all_products();
+endif;
 
 ?>

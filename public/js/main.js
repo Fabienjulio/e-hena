@@ -250,22 +250,6 @@ function search_game(value){
 }
 
 
-function closeAndPause(){
-	$(".videoplay").each(function(){
-		$(this).get(0).pause();
-	});
-}
-
-
-function closeAndPauseEvent(){
-	$('.playvideo').each(function (){
-		$(this).on('hide.bs.modal', function (){
-			closeAndPause();
-		});
-	});
-}
-
-
 function heartMe(val){
 	$('#' + val).animate({fontSize: 25, opacity: 2}, 400, function(){
 		$(this).animate({fontSize:14, opacity: 15}, 300);

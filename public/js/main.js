@@ -31,8 +31,8 @@ function inscription() {
 
     let nom = $("#inscrire input[name=nom]"); // alaina le champ ana texte ampidirana anarana
     let prenom = $("#inscrire input[name=prenom]"); // karan'le ambony fogn fa porenom ndrek raika ty
+    let cin = $("#inscrire input[name=cin]");
     let email = $("#inscrire input[name=email]"); // mangalaka an le mail nsoratana
-    let cin = $("#inscrire input[name = cin]");
     let phone = $("#inscrire input[name=phone]"); // numero telephone
     let pass1 = $("#inscrire input[name=password]"); // l objet html mot de passe
     let pass2 = $("#inscrire input[name=cpassword]"); // le confirmationy e
@@ -85,6 +85,7 @@ function sInscrire(nom, prenom, cin, email, phone, password) {
         },
         feed_back
     );
+    console.log(feed_back);
 
     function feed_back(response) {
         if (response == 1) {
@@ -229,16 +230,6 @@ $(function() {
 
 
 });
-
-
-
-function search_game(value) {
-    window.location = '#' + value;
-    $("[id='" + value + "']").find('h6>a').animate({ color: 'red', fontSize: '30px' }, 500, function() {
-        $(this).animate({ color: '#212529', fontSize: '17.6px' }, 500)
-    });
-}
-
 
 function heartMe(val) {
     $('#' + val).animate({ fontSize: 25, opacity: 2 }, 400, function() {

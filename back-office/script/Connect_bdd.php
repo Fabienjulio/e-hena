@@ -48,7 +48,6 @@ class Query_bdd extends Connect_bdd{
     return  json_encode($all_games);
   }
 
-
   public function info_user($phone){
     $bdd = $this->dbconnect();
     $user = $bdd->query("SELECT * FROM User WHERE telephone='$phone' ");
